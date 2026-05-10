@@ -1,0 +1,20 @@
+[auth]
+credentials_file = "credentials.json"
+
+[calendar]
+default_view = "monthly"
+week_starts_on = "monday"
+working_hours_start = 8
+working_hours_end = 18
+timezone = ""
+
+[display]
+show_declined = false
+show_tasks = true
+max_event_chips_per_day = 3
+
+[api]
+max_results_per_page = 250
+events_lookahead_days = 180
+events_lookbehind_days = 60
+cache_ttl_seconds = 300
