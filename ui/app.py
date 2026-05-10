@@ -93,6 +93,7 @@ class CalTuiApp(App):
         self._max_chips: int = config.get("display", {}).get("max_event_chips_per_day", 3)
         self._show_tasks: bool = config.get("display", {}).get("show_tasks", True)
         self._pending_panel_action: str | None = None
+        self._fetched_window: tuple[datetime, datetime] | None = None
 
     # ── Layout ─────────────────────────────────────────────────────────
 
@@ -130,6 +131,7 @@ class CalTuiApp(App):
                     self._apply_data,
                     entry.calendars, entry.events, entry.tasks, entry.task_lists,
                     from_cache=True,
+                    window=(time_min, time_max),
                 )
                 return
 
@@ -177,7 +179,8 @@ class CalTuiApp(App):
 
         cache.save(time_min, time_max, calendars, all_events, all_tasks, all_task_lists)
         self.call_from_thread(
-            self._apply_data, calendars, all_events, all_tasks, all_task_lists
+            self._apply_data, calendars, all_events, all_tasks, all_task_lists,
+            window=(time_min, time_max),
         )
 
     def _apply_data(
@@ -187,6 +190,7 @@ class CalTuiApp(App):
         tasks: list[Task],
         task_lists: list[TaskList],
         from_cache: bool = False,
+        window: tuple[datetime, datetime] | None = None,
     ) -> None:
         self._calendars = calendars
         self._events = events
@@ -195,6 +199,8 @@ class CalTuiApp(App):
         self._is_loading = False
         self._last_sync = datetime.now()
         self._last_error = None
+        if window is not None:
+            self._fetched_window = window
 
         self._update_active_view()
         self._update_status_bar()
@@ -251,12 +257,19 @@ class CalTuiApp(App):
 
     def _event_window(self) -> tuple[datetime, datetime]:
         cfg = self._config.get("api", {})
-        behind = cfg.get("events_lookbehind_days", 30)
-        ahead = cfg.get("events_lookahead_days", 60)
+        behind = cfg.get("events_lookbehind_days", 60)
+        ahead = cfg.get("events_lookahead_days", 180)
         now = datetime.now(timezone.utc)
+        selected = datetime(
+            self._current_date.year, self._current_date.month, self._current_date.day,
+            tzinfo=timezone.utc,
+        )
+        # Extend the window to always cover the selected date plus a buffer
+        anchor_min = min(now, selected)
+        anchor_max = max(now, selected)
         return (
-            now - timedelta(days=behind),
-            now + timedelta(days=ahead),
+            anchor_min - timedelta(days=behind),
+            anchor_max + timedelta(days=ahead),
         )
 
     # ── Actions ─────────────────────────────────────────────────────────
@@ -277,6 +290,18 @@ class CalTuiApp(App):
         """Called on keyboard navigation. Uses per-view fast path where possible."""
         self._update_selection()
         self._update_status_bar()
+        self._check_window_and_reload()
+
+    def _check_window_and_reload(self) -> None:
+        if self._fetched_window is None or self._is_loading:
+            return
+        selected = datetime(
+            self._current_date.year, self._current_date.month, self._current_date.day,
+            tzinfo=timezone.utc,
+        )
+        w_min, w_max = self._fetched_window
+        if selected < w_min or selected > w_max:
+            self.load_data(force=True)
 
     def _update_selection(self) -> None:
         """Update selected date without a full data-driven rebuild.
