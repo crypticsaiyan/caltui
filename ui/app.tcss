@@ -1,0 +1,337 @@
+/* ── Root ──────────────────────────────────────────────────────────── */
+CalTuiApp {
+    layout: vertical;
+}
+
+#app-body {
+    layout: horizontal;
+    height: 1fr;
+}
+
+/* ── Main content area ─────────────────────────────────────────────── */
+#main-content {
+    width: 1fr;
+    layout: vertical;
+}
+
+ContentSwitcher {
+    height: 1fr;
+}
+
+/* ── Event detail panel ────────────────────────────────────────────── */
+#event-panel {
+    width: 36;
+    background: $surface;
+    border-left: tall $primary-darken-2;
+    overflow-y: auto;
+    display: none;
+    padding: 1;
+}
+
+#event-panel.visible {
+    display: block;
+}
+
+/* ── Status bar ────────────────────────────────────────────────────── */
+#status-bar {
+    height: 1;
+    background: $primary-darken-2;
+    layout: horizontal;
+    dock: bottom;
+}
+
+#sb-date-view {
+    width: 32;
+    color: $text;
+    padding: 0 1;
+}
+
+#sb-sync {
+    width: 1fr;
+    color: $text-muted;
+    padding: 0 1;
+}
+
+#sb-hints {
+    width: auto;
+    color: $text-muted;
+    padding: 0 1;
+}
+
+/* ── Event panel ───────────────────────────────────────────────────── */
+#ep-title {
+    text-style: bold;
+    margin-bottom: 1;
+    color: $text;
+}
+
+#ep-when {
+    color: $text-muted;
+}
+
+#ep-where {
+    color: $text-muted;
+}
+
+#ep-description {
+    color: $text;
+    margin-top: 1;
+}
+
+#ep-attendees {
+    color: $text-muted;
+    margin-top: 1;
+}
+
+#ep-calendar {
+    color: $text-muted;
+    margin-top: 1;
+}
+
+#ep-recurring {
+    color: $warning;
+    margin-top: 1;
+}
+
+#ep-actions {
+    layout: horizontal;
+    margin-top: 2;
+    height: 3;
+}
+
+#ep-actions Button {
+    margin-right: 1;
+}
+
+/* ── Agenda view ───────────────────────────────────────────────────── */
+AgendaView {
+    overflow-y: auto;
+    padding: 0;
+}
+
+.agenda-empty {
+    text-align: center;
+    color: $text-muted;
+    padding: 4;
+}
+
+.agenda-date-header {
+    text-style: bold;
+    background: $surface-darken-1;
+    padding: 0 1;
+    color: $accent;
+    height: 1;
+}
+
+.agenda-event-row {
+    layout: horizontal;
+    height: 1;
+    padding: 0 1;
+}
+
+.agenda-event-row:hover {
+    background: $primary-darken-3;
+}
+
+.agenda-event-row.selected {
+    background: $primary-darken-2;
+}
+
+.agenda-event-time {
+    width: 13;
+    color: $text-muted;
+}
+
+.agenda-event-dot {
+    width: 2;
+}
+
+.agenda-event-title {
+    width: 1fr;
+    overflow: hidden;
+}
+
+.agenda-event-cal {
+    width: 12;
+    color: $text-muted;
+    text-align: right;
+    overflow: hidden;
+}
+
+.agenda-task-row {
+    layout: horizontal;
+    height: 1;
+    padding: 0 1;
+    color: $text-muted;
+}
+
+.agenda-task-row.selected {
+    background: $primary-darken-2;
+}
+
+.agenda-task-check {
+    width: 3;
+}
+
+.agenda-task-title {
+    width: 1fr;
+}
+
+/* ── Monthly view ──────────────────────────────────────────────────── */
+MonthlyView {
+    layout: vertical;
+}
+
+.month-nav {
+    layout: horizontal;
+    height: 1;
+    background: $surface-darken-1;
+}
+
+.month-nav-btn {
+    width: 3;
+    min-width: 3;
+    border: none;
+    background: $surface-darken-1;
+    color: $text;
+}
+
+.month-title {
+    width: 1fr;
+    text-align: center;
+    text-style: bold;
+    color: $text;
+    padding: 0 1;
+}
+
+.month-dow-row {
+    layout: grid;
+    grid-size: 7;
+    height: 1;
+    background: $surface-darken-1;
+}
+
+.month-dow-label {
+    text-align: center;
+    color: $text-muted;
+}
+
+.month-grid {
+    layout: grid;
+    grid-size: 7;
+    height: 1fr;
+    overflow-y: auto;
+    grid-rows: 7;
+}
+
+DayCell {
+    border: solid $surface-lighten-1;
+    overflow-y: auto;
+    padding: 0;
+    layout: vertical;
+}
+
+DayCell:focus {
+    border: solid $accent;
+}
+
+DayCell.today .day-number {
+    color: $accent;
+    text-style: bold;
+}
+
+DayCell.today {
+    border: solid $accent;
+}
+
+DayCell.selected {
+    border: solid $primary;
+}
+
+DayCell.today.selected {
+    border: solid $accent;
+    background: $primary-darken-3;
+}
+
+DayCell.other-month {
+    background: $surface-darken-1;
+}
+
+DayCell.other-month .day-number {
+    color: $text-disabled;
+}
+
+.day-number {
+    text-align: right;
+    padding: 0 1;
+    color: $text;
+    height: 1;
+}
+
+.event-chip {
+    height: 1;
+    overflow: hidden;
+    padding: 0 1;
+}
+
+.overflow-label {
+    color: $text-muted;
+    padding: 0 1;
+    height: 1;
+    text-style: italic;
+}
+
+/* ── Modals ────────────────────────────────────────────────────────── */
+EventFormModal {
+    align: center middle;
+}
+
+SearchModal {
+    align: center middle;
+}
+
+DeleteConfirmModal {
+    align: center middle;
+}
+
+HelpModal {
+    align: center middle;
+}
+
+.modal-container {
+    background: $surface;
+    border: round $primary;
+    padding: 1 2;
+}
+
+.modal-title {
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.form-label {
+    color: $text-muted;
+    margin-top: 1;
+}
+
+.modal-actions {
+    layout: horizontal;
+    margin-top: 1;
+    height: 3;
+}
+
+.modal-actions Button {
+    margin-right: 1;
+}
+
+#search-results {
+    height: 20;
+    border: solid $surface-lighten-1;
+    margin-top: 1;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    height: 2;
+    padding: 0 1;
+}
