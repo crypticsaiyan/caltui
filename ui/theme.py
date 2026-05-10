@@ -39,7 +39,7 @@ def color_for_event(event, calendar=None) -> str:
     if event.color_id:
         if event.color_id in GOOGLE_COLOR_ID_TO_HEX:
             return GOOGLE_COLOR_ID_TO_HEX[event.color_id]
-        # Google sometimes returns background colors not in our map — try calendar
+        # Google sometimes returns background colors not in our map; try calendar
     if calendar and calendar.color_id in GOOGLE_COLOR_ID_TO_HEX:
         return GOOGLE_COLOR_ID_TO_HEX[calendar.color_id]
     return DEFAULT_EVENT_COLOR

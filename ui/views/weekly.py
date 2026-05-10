@@ -136,7 +136,7 @@ class WeeklyView(Widget):
             self._selected_date = new_date
             self._update_day_headers()
         else:
-            # Week changed — need new events; fire DateSelected so app re-fetches view
+            # Week changed; need new events. Fire DateSelected so app re-fetches view
             self._selected_date = new_date
             self._week_start = week_start
             self._update_title()

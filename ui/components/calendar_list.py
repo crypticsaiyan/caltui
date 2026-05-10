@@ -58,7 +58,7 @@ class CalendarList(Widget):
             if cb.id not in wanted:
                 cb.remove()
 
-        # Add missing, update existing — query AFTER scheduling removals so
+        # Add missing, update existing; query AFTER scheduling removals so
         # existing_ids still contains them (prevents duplicate-ID mount race)
         existing_ids: set[str] = {cb.id for cb in self.query(Checkbox)}
         for cb_id, cal in wanted.items():

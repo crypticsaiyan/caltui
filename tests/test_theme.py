@@ -1,4 +1,4 @@
-"""Unit tests for ui/theme.py — no Textual required."""
+"""Unit tests for ui/theme.py; no Textual required."""
 from __future__ import annotations
 import pytest
 from ui.theme import (
@@ -55,7 +55,7 @@ def test_color_for_event_none_id_falls_back_to_calendar():
 
 def test_color_for_event_unknown_id_falls_back_to_calendar():
     ev = _FakeEvent("16")          # unknown event color
-    cal = _cal("2")                # sage — valid calendar color
+    cal = _cal("2")                # sage, valid calendar color
     assert color_for_event(ev, cal) == "#33b679"
 
 
@@ -100,5 +100,5 @@ def test_contrasting_text_mid_dark():
 
 
 def test_contrasting_text_banana():
-    # banana (#f6bf26) is bright yellow — should get dark text
+    # banana (#f6bf26) is bright yellow; should get dark text
     assert contrasting_text("#f6bf26") == "#000000"

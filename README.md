@@ -1,19 +1,19 @@
 # caltui
 
-Google Calendar in your terminal — a keyboard-driven TUI built with [Textual](https://textual.textualize.io/).
+Google Calendar in your terminal: a keyboard-driven TUI built with [Textual](https://textual.textualize.io/).
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Textual](https://img.shields.io/badge/textual-%E2%89%A50.70-purple)
 
 ## Features
 
-- **Four views** — Monthly, Weekly, Daily (modal), Agenda
-- **Full CRUD** — create, edit, and delete calendar events without leaving the terminal
-- **Google Tasks** — task due dates rendered alongside events
-- **Search** — full-text search across all selected calendars
-- **Disk cache** — data survives restarts; configurable TTL (default 5 min)
+- **Four views**: Monthly, Weekly, Daily (modal), Agenda
+- **Full CRUD**: create, edit, and delete calendar events without leaving the terminal
+- **Google Tasks**: task due dates rendered alongside events
+- **Search**: full-text search across all selected calendars
+- **Disk cache**: data survives restarts; configurable TTL (default 5 min)
 - **All 11 Google colors** rendered with contrast-safe text
-- **Vim-style navigation** — `hjkl`, `[/]` period jumps, `:` date jump
+- **Vim-style navigation**: `hjkl`, `[/]` period jumps, `:` date jump
 
 ## Requirements
 
@@ -131,7 +131,7 @@ cache_ttl_seconds = 300
 
 ```
 caltui/
-├── main.py                  # Entry point — loads config, authenticates, starts app
+├── main.py                  # Entry point: loads config, authenticates, starts app
 ├── models.py                # Dataclasses: CalEvent, GCalendar, Task, TaskList
 ├── pyproject.toml
 ├── config/
@@ -143,7 +143,7 @@ caltui/
 │   ├── tasks.py             # Google Tasks API wrapper
 │   └── cache.py             # Disk cache (JSON, TTL-aware, window-aware)
 ├── ui/
-│   ├── app.py               # CalTuiApp — root app, keybindings, data loading
+│   ├── app.py               # CalTuiApp: root app, keybindings, data loading
 │   ├── app.tcss             # Textual CSS
 │   ├── messages.py          # Custom Textual messages
 │   ├── theme.py             # Google color → hex mapping, contrast helpers
@@ -187,7 +187,7 @@ pytest
 pytest tests/test_theme.py -v
 ```
 
-Tests use `pytest-asyncio` in `auto` mode — no `@pytest.mark.asyncio` decoration needed.
+Tests use `pytest-asyncio` in `auto` mode; no `@pytest.mark.asyncio` decoration needed.
 
 ## Troubleshooting
 
@@ -201,7 +201,7 @@ caltui tries ports 8080–8083. Free one of them and re-run.
 Press `r` to force a sync, bypassing the disk cache.
 
 **`token.json` is invalid / revoked**
-Delete `~/.config/caltui/token.json` and rerun — the OAuth flow will restart.
+Delete `~/.config/caltui/token.json` and rerun; the OAuth flow will restart.
 
 ## License
 

@@ -317,7 +317,7 @@ class CalTuiApp(App):
             self._sync_date()
 
     def action_nav_prev_period(self) -> None:
-        """[ — jump back one month (monthly view) or one week (others)."""
+        """[ jumps back one month (monthly view) or one week (weekly/other)."""
         if self._view_name == "monthly":
             m = self._current_date.month - 1
             y = self._current_date.year
@@ -330,7 +330,7 @@ class CalTuiApp(App):
         self._sync_date()
 
     def action_nav_next_period(self) -> None:
-        """] — jump forward one month (monthly view) or one week (others)."""
+        """] jumps forward one month (monthly view) or one week (weekly/other)."""
         if self._view_name == "monthly":
             m = self._current_date.month + 1
             y = self._current_date.year

@@ -129,7 +129,7 @@ class MonthlyView(Widget):
         self._selected_date = new_date
 
         if new_date.year == self._year and new_date.month == self._month:
-            # Same month — just move the selected class, no widget churn
+            # Same month: just move the selected class, no widget churn
             if old_date != new_date:
                 try:
                     self.query_one(f"#mday-{old_date.isoformat()}", DayCell).remove_class("selected")

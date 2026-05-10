@@ -53,7 +53,7 @@ class HelpModal(ModalScreen[None]):
 
     def compose(self) -> ComposeResult:
         with Container():
-            yield Label("Keyboard Shortcuts — caltui", classes="help-title")
+            yield Label("Keyboard Shortcuts: caltui", classes="help-title")
             yield Label(HELP_TEXT, classes="help-body")
             yield Button("Close [Esc]", id="help-close")
 

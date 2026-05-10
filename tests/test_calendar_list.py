@@ -77,7 +77,7 @@ async def test_update_twice_no_duplicate_ids():
 
 @pytest.mark.asyncio
 async def test_unknown_color_ids_do_not_crash():
-    """Google Classroom calendars use color IDs 14 and 16 — outside our map."""
+    """Google Classroom calendars use color IDs 14 and 16, outside our map."""
     app = CalListApp()
     async with app.run_test() as pilot:
         cal_list = app.query_one(CalendarList)
@@ -125,7 +125,7 @@ async def test_update_removes_stale_calendar():
         await pilot.pause()
         assert len(list(app.query(Checkbox))) == 2
         cal_list.update(updated)
-        await pilot.pause(delay=0.1)  # removal is async — give event loop a tick
+        await pilot.pause(delay=0.1)  # removal is async; give event loop a tick
         assert len(list(app.query(Checkbox))) == 1
 
 
