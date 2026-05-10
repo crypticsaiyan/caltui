@@ -15,6 +15,17 @@ Google Calendar in your terminal: a keyboard-driven TUI built with [Textual](htt
 - **All 11 Google colors** rendered with contrast-safe text
 - **Vim-style navigation**: `hjkl`, `[/]` period jumps, `:` date jump
 
+## Screenshots
+
+**Monthly view**
+![Monthly view](assets/screenshots/monthly.png)
+
+**Weekly view**
+![Weekly view](assets/screenshots/weekly.png)
+
+**Daily popup**
+![Daily popup](assets/screenshots/daily.png)
+
 ## Requirements
 
 - Python 3.11+
